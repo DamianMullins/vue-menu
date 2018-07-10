@@ -36,11 +36,11 @@ const numberFormats = {
     }
 };
 
-const i18n = new VueI18n({
+const i18n = {
     locale: document.querySelector('html').getAttribute('lang'),
     fallbackLocale: 'en-GB',
     messages,
     numberFormats
-});
+};
 
 export default i18n;
