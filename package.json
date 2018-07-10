@@ -2,9 +2,17 @@
   "name": "vuejs-menu",
   "version": "1.0.0",
   "description": "",
-  "dependencies": {
-    "babel-plugin-transform-object-rest-spread": "6.26.0"
+  "dependencies": {},
+  "devDependencies": {
+    "@justeat/gulp-build-fozzie": "^7.20.0",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "gulp": "^3.9.1"
   },
-  "devDependencies": {},
-  "keywords": []
+  "browserslist": [
+    "> 5%",
+    "last 2 versions",
+    "Safari >= 8",
+    "not ie 10"
+  ]
 }

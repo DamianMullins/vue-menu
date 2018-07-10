@@ -1,0 +1,12 @@
+{
+    "extends": "@justeat/eslint-config-fozzie",
+
+    "rules": {
+        "no-new": "off"
+    },
+
+    "globals": {
+        "Vue": true,
+        "VueI18n": true
+    }
+}

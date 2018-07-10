@@ -1,5 +1,4 @@
 .c-basket {
-  -webkit-box-shadow: 0 0 0 1px #eaeaea;
   box-shadow: 0 0 0 1px #eaeaea;
   border-radius: 3px;
   background-color: #fff;
@@ -29,12 +28,7 @@
 }
 
 .c-basket-row {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
   flex-direction: row;
   margin: 0 8px;
 }
@@ -55,12 +49,10 @@
 }
 
 .c-basket-item {
-  -webkit-box-flex: 3;
-  -ms-flex: 3 1 auto;
-  flex: 3 1 auto;
+  flex-grow: 1;
   overflow: hidden;
   word-wrap: break-word;
-  padding-right: 5px;
+  padding: 5px;
   margin: 0;
 }
 
@@ -69,9 +61,6 @@
 }
 
 .c-basket-price {
-  -webkit-box-flex: 1;
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
   text-align: right;
   margin: 0;
 }
@@ -119,6 +108,15 @@
 }
 .c-basket-deliveryOrCollectionDetails .c-basket-deliveryEstimatedFor {
   border-bottom: 1px dotted;
-  -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
+}
+
+.o-btn--small {
+  line-height: .5;
+}
+
+.o-btn--primary:hover:not(.o-btnLink),
+.o-btn--primary:active:not(.o-btnLink),
+.o-btn--primary:focus:not(.o-btnLink) {
+    background-color: #14427d;
 }

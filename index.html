@@ -1,25 +1,35 @@
-<html>
+<html lang="en-GB">
 
 <head>
 	<title>Parcel Sandbox</title>
 	<meta charset="UTF-8" />
 	<link href="https://s3-eu-west-1.amazonaws.com/je-cdn-ieng-staging/ca/fozzie-assets/fozzie/dist/css/fozzie-a631cbb89c.min.css"
 	 rel="stylesheet" />
-	<link href="/src/main.css" rel="stylesheet" />
+	<link href="src/main.css" rel="stylesheet" />
 </head>
 
 <body>
 	<div class="l-container">
-		<div class="g g--stack--narrow g--gutter">
+		<div data-locale-changer>
+			<select v-model="locale" @change="updateLocale">
+				<option v-for="lang in langs" :value="lang">{{ lang }}</option>
+			</select>
+		</div>
+
+		<div class="l-content g g--stack--narrow g--gutter">
+
 			<div data-menu-items class="g-col g-span6 c-listing">
 				<div v-for="item in shared.menu.items">
 					<section class="g c-listing-item">
 						<div class="g-col g-span9">
 							<p class="c-listing-item-text" v-html="item.name">{{ item.name }}</p>
-							<p class="c-listing-item-text">{{ item.price | toCurrency }}</p>
+							<p class="c-listing-item-text">{{ $n(item.price, 'currency') }}</p>
 						</div>
-						<div class="g-col g-span3">
-							<button class="o-btn o-btn--primary" @click="addItem(item)">Add</button>
+						<div class="g-col g-span3 text-right">
+							<button class="o-btn o-btn--primary o-btn--small" @click="addItem(item)">
+								+
+								<span class="is-visuallyHidden" v-html="$t('menu.addItem', { item: item.name })"></span>
+							</button>
 						</div>
 					</section>
 				</div>
@@ -33,11 +43,15 @@
 					<div data-basket-items>
 						<div v-for="item in shared.basket.items">
 							<div class="c-basket-row">
+								<button class="o-btn o-btn--small" @click="removeItem(item)">
+									-
+									<span class="is-visuallyHidden" v-html="$t('menu.removeItem', { item: item.name })"></span>
+								</button>
 								<p class="c-basket-item">
-									{{ item.quantity }} x 
+									{{ item.quantity }} x
 									<span v-html="item.name">{{ item.name }}</span>
-									</p>
-								<p class="c-basket-price">{{ itemTotal(item) | toCurrency }}</p>
+								</p>
+								<p class="c-basket-price">{{ $n(itemTotal(item), 'currency') }}</p>
 							</div>
 						</div>
 					</div>
@@ -47,20 +61,20 @@
 					<div class="c-basket-totals" data-basket-totals>
 						<div class="c-basket-row c-basket-row--spaced">
 							<p class="c-basket-item c-basket-subtotal u-uppercase">subtotal</p>
-							<p class="c-basket-price c-basket-subtotal">{{ subtotal | toCurrency }}</p>
+							<p class="c-basket-price c-basket-subtotal">{{ $n(subtotal, 'currency') }}</p>
 						</div>
 
 						<div class="c-basket-group c-basket-group--spaced">
 							<div class="c-basket-row">
 								<p class="c-basket-item">Delivery Fee</p>
-								<p class="c-basket-price">{{ shared.basket.deliveryFee | toCurrency }}</p>
+								<p class="c-basket-price">{{ $n(shared.basket.deliveryFee, 'currency') }}</p>
 							</div>
 						</div>
 
 						<div class="c-basket-row">
 							<p class="c-basket-item c-basket-total gamma u-uppercase">total</p>
 							<p class="c-basket-price c-basket-total gamma">
-								{{ total | toCurrency }}
+								{{ $n(total, 'currency') }}
 							</p>
 						</div>
 					</div>
@@ -85,7 +99,8 @@
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-	<script src="src/index.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue-i18n@8.0.0/dist/vue-i18n.js"></script>
+	<script src="dist/js/script.js"></script>
 </body>
 
 </html>
