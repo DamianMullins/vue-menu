@@ -1,0 +1,10 @@
+{
+  "name": "vuejs-menu",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "6.26.0"
+  },
+  "devDependencies": {},
+  "keywords": []
+}
