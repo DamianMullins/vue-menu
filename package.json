@@ -16,7 +16,7 @@
     "vueify": "^9.4.1"
   },
   "scripts": {
-    "build": "browserify -t [ babelify ] -t vueify -e src/js/main.js -o dist/build.js"
+    "build": "browserify -t babelify -t vueify -e src/js/main.js -o dist/build.js"
   },
   "browserslist": [
     "> 5%",
