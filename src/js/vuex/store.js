@@ -45,7 +45,7 @@ export default new Vuex.Store({
         getAllMenuItems: ({ commit }) => {
             menuApi.getItems()
                 .then(items => {
-                    commit(MENU_GET_ALL_ITEMS, { items });
+                    commit(MENU_GET_ALL_ITEMS, items);
                 });
         },
 
@@ -71,7 +71,7 @@ export default new Vuex.Store({
     },
 
     mutations: {
-        [MENU_GET_ALL_ITEMS]: (state, { items }) => {
+        [MENU_GET_ALL_ITEMS]: (state, items) => {
             state.menu.items = items;
         },
 
