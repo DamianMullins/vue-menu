@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div v-for="item in shared.basket.items" :key="item.name">
+    <div v-for="item in basket.items" :key="item.name">
         <div class="c-basket-row">
             <button class="o-btn o-btn--small" @click="removeItem(item)">
                 -
@@ -17,32 +17,20 @@
 </template>
 
 <script>
-import store from "./store";
+import { mapState, mapActions } from "vuex";
 
 export default {
-  data() {
-    return {
-      shared: store
-    };
+  name: 'basket-items',
+
+  computed: {
+    ...mapState(["basket"])
   },
 
   methods: {
+    ...mapActions(["removeItem"]),
+
     itemTotal(item) {
       return item.price * item.quantity;
-    },
-
-    removeItem(item) {
-      const exisingItem = this.shared.basket.items.find(
-        i => i.name === item.name
-      );
-
-      if (exisingItem.quantity > 1) {
-        exisingItem.quantity -= 1;
-      } else {
-        this.shared.basket.items = this.shared.basket.items.filter(
-          i => i.name !== item.name
-        );
-      }
     }
   }
 };

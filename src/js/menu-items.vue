@@ -1,6 +1,6 @@
 <template>
-<div>
-    <div v-for="item in shared.menu.items" :key="item.name">
+<div class="g-col g-span6 c-listing">
+    <div v-for="item in menu.items" :key="item.name">
         <section class="g c-listing-item">
             <div class="g-col g-span9">
                 <p class="c-listing-item-text" v-html="item.name">{{ item.name }}</p>
@@ -18,55 +18,21 @@
 </template>
 
 <script>
-import store from "./store";
-
-const menuItems = [
-  {
-    name: "Traditional Lemonade &amp; Mint",
-    price: 2.39
-  },
-  {
-    name: "Mojo Juice, Apple",
-    price: 2.39
-  },
-  {
-    name: "Mojo Juice, Mango",
-    price: 2.39
-  },
-  {
-    name: "Mojo Juice, Orange",
-    price: 2.39
-  },
-  {
-    name: "Tropical Lightning, Apple",
-    price: 2.39
-  }
-];
+import { mapState, mapActions } from "vuex";
 
 export default {
-  data() {
-    return {
-      shared: store
-    };
-  },
+  name: 'menu-items',
 
   created() {
-    // Should be ajax call or similar
-    this.shared.menu.items = menuItems;
+    this.getAllMenuItems();
+  },
+
+  computed: {
+    ...mapState(["menu"])
   },
 
   methods: {
-    addItem(item) {
-      const exisingItem = this.shared.basket.items.find(
-        i => i.name === item.name
-      );
-
-      if (exisingItem) {
-        exisingItem.quantity += 1;
-      } else {
-        this.shared.basket.items.push({ ...item, quantity: 1 });
-      }
-    }
+    ...mapActions(["getAllMenuItems", "addItem"])
   }
 };
 </script>
