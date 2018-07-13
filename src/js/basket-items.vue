@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div v-for="item in basket.items" :key="item.name">
+    <div v-for="item in basketItems" :key="item.name">
         <div class="c-basket-row">
             <button class="o-btn o-btn--small" @click="removeItem(item)">
                 -
@@ -17,13 +17,13 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: 'basket-items',
 
   computed: {
-    ...mapState(["basket"])
+    ...mapGetters(["basketItems"])
   },
 
   methods: {

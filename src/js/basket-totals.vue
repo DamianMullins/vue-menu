@@ -29,9 +29,9 @@ export default {
   name: 'basket-totals',
 
   computed: {
-    ...mapState(["basket"]),
-
     ...mapGetters(["subtotal", "total"]),
+
+    ...mapState(["basket"])
   }
 };
 </script>

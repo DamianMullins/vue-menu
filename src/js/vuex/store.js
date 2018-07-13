@@ -28,8 +28,15 @@ export default new Vuex.Store({
     },
 
     getters: {
-        subtotal: state => state.basket.items
-            .reduce((prev, item) => prev + (item.price * item.quantity), 0),
+        basketItems: (state, getters, { menu }) =>
+            state.basket.items.map(({ id, quantity }) =>
+                ({
+                    ...menu.items.find(item => item.id === id),
+                    quantity
+                })),
+
+        subtotal: (state, getters) => getters.basketItems
+            .reduce((total, item) => total + (item.price * item.quantity), 0),
 
         total: (state, getters) => getters.subtotal + state.basket.deliveryFee
     },
@@ -42,23 +49,23 @@ export default new Vuex.Store({
                 });
         },
 
-        addItem: ({ state, commit }, item) => {
-            const exisingItem = state.basket.items.find(i => i.id === item.id);
+        addItem: ({ state, commit }, { id }) => {
+            const item = state.basket.items.find(i => i.id === id);
 
-            if (exisingItem) {
-                commit(BASKET_INCREMENT_ITEM_QUANTITY, { item });
+            if (item) {
+                commit(BASKET_INCREMENT_ITEM_QUANTITY, id);
             } else {
-                commit(BASKET_ADD_ITEM, { item });
+                commit(BASKET_ADD_ITEM, id);
             }
         },
 
-        removeItem: ({ state, commit }, item) => {
-            const exisingItem = state.basket.items.find(i => i.name === item.name);
+        removeItem: ({ state, commit }, { id }) => {
+            const item = state.basket.items.find(i => i.id === id);
 
-            if (exisingItem.quantity > 1) {
-                commit(BASKET_DECREMENT_ITEM_QUANTITY, { item });
+            if (item.quantity > 1) {
+                commit(BASKET_DECREMENT_ITEM_QUANTITY, id);
             } else {
-                commit(BASKET_REMOVE_ITEM, { item });
+                commit(BASKET_REMOVE_ITEM, id);
             }
         }
     },
@@ -68,21 +75,21 @@ export default new Vuex.Store({
             state.menu.items = items;
         },
 
-        [BASKET_ADD_ITEM]: (state, { item }) => {
-            state.basket.items.push({ ...item, quantity: 1 });
+        [BASKET_ADD_ITEM]: (state, id) => {
+            state.basket.items.push({ id, quantity: 1 });
         },
 
-        [BASKET_REMOVE_ITEM]: (state, { item }) => {
-            state.basket.items = state.basket.items.filter(i => i.name !== item.name);
+        [BASKET_REMOVE_ITEM]: (state, id) => {
+            state.basket.items = state.basket.items.filter(item => item.id !== id);
         },
 
-        [BASKET_INCREMENT_ITEM_QUANTITY]: (state, { item }) => {
-            const exisingItem = state.basket.items.find(i => i.id === item.id);
+        [BASKET_INCREMENT_ITEM_QUANTITY]: (state, id) => {
+            const exisingItem = state.basket.items.find(item => item.id === id);
             exisingItem.quantity++;
         },
 
-        [BASKET_DECREMENT_ITEM_QUANTITY]: (state, { item }) => {
-            const exisingItem = state.basket.items.find(i => i.id === item.id);
+        [BASKET_DECREMENT_ITEM_QUANTITY]: (state, id) => {
+            const exisingItem = state.basket.items.find(item => item.id === id);
             exisingItem.quantity--;
         }
     }
