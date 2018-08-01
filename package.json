@@ -2,7 +2,7 @@
   "name": "vuejs-menu",
   "version": "1.0.0",
   "private": true,
-  "description": "Lead up work to the .Net Core SSR React project — https://github.com/DamianMullins/netcore-react",
+  "description": "Lead up work to the .Net Core SSR Vue project — https://github.com/DamianMullins/netcore-vue",
   "author": "Damian Mullins <damian.mullins@just-eat.com> (http://www.damianmullins.com)",
   "license": "ISC",
   "scripts": {
